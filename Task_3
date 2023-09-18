@@ -1,0 +1,27 @@
+import random
+import string
+
+def generate_password(length):
+    characters = string.ascii_letters + string.digits + '!@#$%^&*()_+-='
+    password = ''.join(random.choice(characters) for _ in range(length))
+    return password
+
+def main():
+    print("Welcome to Sarah's Password Generator!")
+
+    while True:
+        try:
+            length = int(input("\nEnter the desired password length: "))
+            if length <= 0:
+                print("Please, enter a positive length.")
+            else:
+                password = generate_password(length)
+                print("\nYour Unique Password:")
+                print(password)
+                
+                break
+        except ValueError:
+            print("Invalid input. Please, enter a valid number.")
+
+if __name__ == "__main__":
+    main()
