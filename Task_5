@@ -1,0 +1,53 @@
+class Quiz_Question:
+    def __init__(self, question, choices, correct_choice):
+        self.question = question
+        self.choices = choices
+        self.correct_choice = correct_choice
+
+class QuizGame:
+    def __init__(self):
+        self.questions = []
+        self.score = 0
+
+    def load_questions(self):
+        self.questions.append(Quiz_Question("What is the closest planet to the sun?", ["A) Mercury", "B) Venus", "C) Earth","D) Mars" ], "a"))
+        self.questions.append(Quiz_Question("What is the largest planet in our solar system?", ["A) Earth", "B) Jupiter", "C) Mars" ,"D) Mercury"], "b"))
+        self.questions.append(Quiz_Question("What is the smallest planet in our solar system?", ["A) Earth", "B) Jupiter", "C) Mars" ,"D) Mercury"], "d"))
+        self.questions.append(Quiz_Question("What is hottest planet in our solar system?", ["A) Mercury", "B) Venus", "C) Earth" ,"D) Mars"], "b"))
+        self.questions.append(Quiz_Question("What is coldest planet in our solar system?", ["A) Mercury", "B) Venus", "C) Uranus" ,"D) Mars"], "c"))
+
+    def present_questions(self):
+        for index, question in enumerate(self.questions, start=1):
+            print(f"\nQuestion {index}: {question.question}")
+            for choice in question.choices:
+                print(choice)
+            user_answer = input("Your answer (a/b/c/d): ").lower()
+            self.evaluate_answer(question, user_answer)
+
+    def evaluate_answer(self, question, user_answer):
+        if user_answer == question.correct_choice:
+            print("Correct!")
+            self.score += 1
+        else:
+            print("Incorrect.")
+            print(f"The correct answer is: {question.choices[ord(question.correct_choice) - ord('a')]}")
+
+    def display_final_results(self):
+        print("\nQuiz Finished!")
+        print(f"Your score: {self.score}/{len(self.questions)}")
+        if self.score == len(self.questions):
+            print("Congratulations! You got all the questions right!")
+        elif self.score >= len(self.questions) // 5:
+            print("Well done! You did a good job!")
+        else:
+            print("Keep practicing to improve your score.")
+
+def main():
+    print("Welcome to Quiz Game by Sarah!")
+    quiz = QuizGame()
+    quiz.load_questions()
+    quiz.present_questions()
+    quiz.display_final_results()
+
+if __name__ == "__main__":
+    main()
